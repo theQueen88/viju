@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隐私政策 - VIDream 河南总代理</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/css/style.css">
+<script>
+  (function() {
+    var tone = "deep";
+    function syncMobileHomeExperience() {
+      var isMobile = false;
+      try {
+        isMobile = window.matchMedia ? window.matchMedia("(max-width: 900px)").matches : window.innerWidth <= 900;
+      } catch (e0) {
+        isMobile = (window.innerWidth || document.documentElement.clientWidth || 0) <= 900;
+      }
+      document.documentElement.classList.toggle("mobile-home-experience", isMobile);
+      if (document.body) document.body.classList.toggle("mobile-home-experience", isMobile);
+    }
+    try {
+      var stored = window.localStorage.getItem("vidream:tone");
+      if (stored === "deep" || stored === "shallow") tone = stored;
+    } catch (e) {}
+    document.documentElement.setAttribute("data-tone", tone);
+    document.addEventListener("DOMContentLoaded", syncMobileHomeExperience);
+    window.addEventListener("resize", syncMobileHomeExperience);
+  })();
+</script>
+<style>
+  :root {
+    --standalone-mobile-bg-base: #000;
+  }
+
+  :root[data-tone="shallow"] {
+    --standalone-mobile-bg-base: #192338;
+  }
+
+  .privacy-page {
+    min-height: 100vh;
+    background:
+      linear-gradient(135deg, rgba(10, 10, 15, 0.7) 0%, rgba(26, 26, 46, 0.58) 50%, rgba(22, 33, 62, 0.54) 100%),
+      #000 var(--standalone-page-bg-image, url("/images/bgVideo-firstframe.jpg")) center top / cover no-repeat;
+    padding: 60px 24px;
+  }
+  .standalone-bg-mask {
+    display: none;
+  }
+  .standalone-mobile-bg-video {
+    display: none;
+  }
+  .privacy-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .privacy-card {
+    padding: 48px 40px;
+  }
+  .privacy-content {
+    min-height: 0;
+  }
+  .privacy-card h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .privacy-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .privacy-card h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    color: var(--accent);
+  }
+  .privacy-content > h2:first-child {
+    margin-top: 0;
+  }
+  .privacy-card p,
+  .privacy-card li {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+  .privacy-card ul {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+  .back-link {
+    display: inline-block;
+    margin-top: 32px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+  }
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 900px) {
+    html,
+    body {
+      overflow: hidden;
+    }
+
+    .privacy-page {
+      position: relative;
+      isolation: isolate;
+      min-height: 100dvh;
+      height: 100dvh;
+      overflow: hidden;
+      padding: 28px 18px 24px;
+      background:
+        var(--standalone-mobile-bg-base) var(--standalone-page-bg-image, url("/images/bgVideo-firstframe.jpg")) center top / cover no-repeat;
+    }
+
+    .standalone-bg-mask {
+      display: block;
+      z-index: 2;
+    }
+
+    .standalone-mobile-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+      display: none;
+    }
+
+    .standalone-mobile-bg-video.is-active {
+      display: block;
+    }
+
+    .privacy-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .privacy-card {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 20px 24px;
+    }
+
+    .privacy-content {
+      flex: 1;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding-right: 2px;
+    }
+
+    .privacy-content::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .privacy-title {
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+
+    .privacy-card h2 {
+      font-size: 16px;
+    }
+
+    .back-link {
+      margin-top: 0;
+      flex-shrink: 0;
+    }
+
+    .privacy-page::before,
+    .privacy-page::after {
+      content: "";
+      position: absolute;
+      inset: -18%;
+      z-index: 1;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .privacy-page::before {
+      background:
+        radial-gradient(circle at 24% 26%, rgba(114, 151, 255, 0.34), transparent 34%),
+        radial-gradient(circle at 76% 18%, rgba(174, 119, 255, 0.24), transparent 28%);
+      filter: blur(18px);
+      animation: mobileBgGlowFloat 10s ease-in-out infinite;
+    }
+
+    .privacy-page::after {
+      background:
+        radial-gradient(circle at 68% 72%, rgba(74, 215, 255, 0.2), transparent 28%),
+        radial-gradient(circle at 30% 78%, rgba(255, 255, 255, 0.12), transparent 24%);
+      filter: blur(26px);
+      animation: mobileBgGlowPulse 13s ease-in-out infinite;
+    }
+
+    .privacy-page > *:not(.standalone-bg-mask):not(.standalone-mobile-bg-video) {
+      position: relative;
+      z-index: 3;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="privacy-page">
+  <video class="standalone-mobile-bg-video" id="privacyPageMobileBgVideo" autoplay muted playsinline webkit-playsinline="true" x5-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="false" loop preload="auto" aria-hidden="true"></video>
+  <div class="global-bg-mask standalone-bg-mask" aria-hidden="true"></div>
+  <div class="privacy-container">
+    <h1 class="privacy-title">隐私政策</h1>
+    <div class="privacy-card glass">
+      <div class="privacy-content">
+        <h2>一、收集信息范围</h2>
+        <p>我们在表单中收集以下信息：</p>
+        <ul>
+          <li>手机号</li>
+          <li>团队/个人名称（选填）</li>
+          <li>擅长短剧类型</li>
+          <li>是否使用过 VIDream 工具</li>
+        </ul>
+
+        <h2>二、使用目的</h2>
+        <p>上述信息仅用于以下目的：</p>
+        <ul>
+          <li>短剧订单对接与匹配</li>
+          <li>创作者能力评估</li>
+          <li>VIDream 工具试用通知</li>
+        </ul>
+
+        <h2>三、数据存储期限</h2>
+        <p>您的个人信息将存储 <strong id="retentionDays">365</strong> 天。到期后自动删除或匿名化处理。</p>
+
+        <h2>四、用户权利</h2>
+        <p>您有权随时通过以下方式行使您的个人信息权利：</p>
+        <ul>
+          <li>查询：了解我们存储了您的哪些信息</li>
+          <li>更正：更新不准确或不完整的信息</li>
+          <li>删除：要求删除您的个人信息</li>
+        </ul>
+        <p>请发送邮件至 <strong id="contactEmail">lihuan@viju.cn</strong> 申请，我们将在收到申请后 15 个工作日内处理。</p>
+
+        <h2>五、数据安全承诺</h2>
+        <p>依托 VIDream 数据安全体系，我们承诺：</p>
+        <ul>
+          <li>用户创作数据不泄露、不滥用</li>
+          <li>采用加密传输和存储技术保护您的信息</li>
+          <li>定期进行安全审计和漏洞扫描</li>
+        </ul>
+
+        <h2>六、公司信息</h2>
+        <p id="companyInfo">郑州微爱剧科技有限公司</p>
+      </div>
+    </div>
+    <a href="/" class="back-link">← 返回首页</a>
+  </div>
+</div>
+
+<script src="/js/standalone-mobile-bg.js"></script>
+<script>
+(function() {
+  fetch("/api/config")
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      if (res.success) {
+        var config = res.data || {};
+        if (window.StandaloneMobileBackground) {
+          window.StandaloneMobileBackground.apply({
+            config: config,
+            pageSelector: ".privacy-page",
+            videoSelector: "#privacyPageMobileBgVideo"
+          });
+        }
+        var retentionEl = document.getElementById("retentionDays");
+        if (retentionEl) {
+          retentionEl.textContent = config.data_retention_days || "365";
+        }
+        var emailEl = document.getElementById("contactEmail");
+        if (emailEl) {
+          emailEl.textContent = config.contact_email || "lihuan@viju.cn";
+        }
+        var companyEl = document.getElementById("companyInfo");
+        if (companyEl) {
+          companyEl.textContent = config.company_name || "郑州微爱剧科技有限公司";
+        }
+      }
+    })
+    .catch(function() {});
+
+  fetch("/api/page-view", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ path: "/privacy" }),
+  }).catch(function() {});
+})();
+</script>
+</body>
+</html>

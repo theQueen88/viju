@@ -1,0 +1,16 @@
+[Unit]
+Description=Vidream Site
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/vidream-site
+ExecStart=/usr/bin/java -jar /opt/vidream-site/vidream-site-1.0.0.jar --spring.datasource.url=jdbc:sqlite:/opt/vidream-site/data/vidream.db
+Restart=always
+RestartSec=5
+StandardOutput=append:/opt/vidream-site/logs/app.log
+StandardError=append:/opt/vidream-site/logs/app.log
+
+[Install]
+WantedBy=multi-user.target

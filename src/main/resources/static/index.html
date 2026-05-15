@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>短剧变现闭环平台｜流量→线索→订单→收入</title>
+  <meta name="description" content="短剧变现闭环平台，提供新媒体获客方法、运营生态承接、AI提效交付与多元变现通道；可领取最新订单预览与入驻指引。">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <script>
+    (function () {
+      try {
+        var tone = window.localStorage.getItem("vidream:tone");
+        if (tone !== "deep" && tone !== "shallow") tone = "deep";
+        document.documentElement.setAttribute("data-tone", tone);
+      } catch (e) {
+        document.documentElement.setAttribute("data-tone", "deep");
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/css/style.css?v=20260512-02">
+  <link rel="preload" as="image" href="/images/bgVideo-firstframe.jpg">
+</head>
+
+<body>
+  <div class="global-bg-fallback" id="bgFallback" aria-hidden="true"></div>
+  <canvas class="global-bg-webp" id="bgWebpCanvas" aria-hidden="true"></canvas>
+  <video class="global-bg-video global-bg-video-mobile" id="mobileBgVideo" autoplay muted playsinline webkit-playsinline="true" x5-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="false" loop preload="auto"></video>
+  <video class="global-bg-video" id="globalBgVideo" autoplay muted playsinline preload="auto"></video>
+  <video class="global-bg-video" id="transitionBgVideo" muted playsinline preload="auto"></video>
+  <video class="global-bg-video" id="globalBgVideoLoop" muted playsinline preload="auto"></video>
+  <video class="global-bg-video" id="secondLoopVideo" muted playsinline preload="auto"></video>
+  <video class="global-bg-video" id="thirdLoopVideo" muted playsinline preload="auto"></video>
+  <video class="global-bg-video" id="bottomLoopVideo" muted playsinline preload="auto"></video>
+  <div class="global-bg-mask" aria-hidden="true"></div>
+  <nav class="nav-dots" id="navDots"></nav>
+
+  <header class="site-navbar" aria-label="主导航">
+    <div class="site-navbar-inner">
+      <a class="site-brand" href="#home" aria-label="返回首页">
+        <img id="companyLogo" src="/images/vidream.png" alt="" style="width: 32px;height: 32px;">
+        <span class="site-brand-mark">VIDream</span>
+        <!-- <span class="site-brand-badge">Beta</span> -->
+      </a>
+
+      <nav class="site-navbar-links commonGlassBar" aria-label="站点导航">
+        <a href="#home" data-nav="home">首页</a>
+        <a href="#resources" data-nav="resources">资源</a>
+        <a href="#cooperation" data-nav="cooperation">合作</a>
+        <a href="#contact" data-nav="contact">咨询</a>
+      </nav>
+
+      <div class="site-navbar-right">
+        <button class="tone-toggle glass-strong" id="toneToggle" type="button" aria-label="切换深浅模式" title="切换深浅模式">
+          <svg class="tone-icon tone-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <svg class="tone-icon tone-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="home" data-section="home">
+    <div class="section-content">
+      <div class="hero-badges" id="heroBadges" hidden></div>
+      <h1 class="hero-title" id="heroTitle">短剧接单：订单直连 + AI提效 + 规则验收</h1>
+      <p class="hero-subtitle" id="heroSubtitle">
+        腾讯 / 爱奇艺 / 昆仑万维 / 芒果TV / 无界漫维 合作方<br>
+        依托 VIDream AI 动画引擎，为创作者与工作室提供真实商单 + 工具支持
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary btn-lg" data-cta-slot="contact">立即合作 →</a>
+        <a href="#cooperation" class="btn btn-primary btn-lg" data-cta-slot="cooperation" hidden>查看合作资源 →</a>
+      </div>
+      <p class="hero-stats" id="heroStats"></p>
+    </div>
+  </section>
+
+  <section class="section" id="resources" data-section="resources">
+    <div class="section-content">
+      <h2 class="section-title" id="resourcesTitle">我们凭什么能够给你订单？</h2>
+      <div class="resource-cards" id="resourcesCards"></div>
+      <div class="partner-logos partner-logos-lg glass-sm" id="partnerLogos" hidden>
+        <div class="partner-text">战略合作伙伴</div>
+        <div class="partner-list"></div>
+      </div>
+      <div class="resource-data-bar glass-sm" id="resourceDataBar" hidden></div>
+    </div>
+  </section>
+
+  <section class="section" id="cooperation" data-section="cooperation">
+    <div class="section-content">
+      <h2 class="section-title" id="cooperationTitle">如何合作？门槛低，结算快，AI 全程提效</h2>
+      <div class="resource-cards resource-cards-3 resource-cards-compact" id="cooperationCards"></div>
+      <div class="resource-data-bar glass-sm" id="cooperationNote" hidden></div>
+      <div class="resource-data-bar glass-sm" id="cooperationCase" style="margin-top: 28px;" hidden></div>
+
+      <!-- <div class="cooperation-actions">
+        <button type="button" class="btn btn-primary btn-lg" data-modal-trigger="orderPreview">查看订单预览 →</button>
+        <button type="button" class="btn btn-primary btn-lg" data-modal-trigger="privacy">查看合作规则 →</button>
+      </div> -->
+    </div>
+  </section>
+
+  <section class="section" id="contact" data-section="contact">
+    <div class="section-content">
+      <h2 class="section-title" id="contactTitle" style="margin-bottom: 14px;">立即获取最新订单列表</h2>
+      <p class="hero-stats" id="contactScrollTip" hidden style="width: 35vw; margin: 0 0 18px auto;">请填写下列表单，获取最新订单列表。
+      </p>
+      <div class="contact-shell glass contact-half">
+        <div class="contact-grid">
+          <div class="contact-form" id="contactFormWrapper">
+            <form id="leadForm" novalidate>
+              <div id="contactFieldsContainer"></div>
+              <button type="submit" class="btn btn-primary btn-lg form-submit" id="submitBtn">立即获取订单机会</button>
+            </form>
+            <div class="privacy-notice" id="privacyNotice"></div>
+            <!-- <div class="privacy-actions">
+              <button class="privacy-link-btn" type="button" data-modal-trigger="privacy">查看隐私政策</button>
+              <button class="privacy-link-btn" type="button" data-modal-trigger="orderPreview">查看订单预览</button>
+            </div> -->
+            <div class="form-success-msg" id="formSuccess">
+              <div class="icon">
+                <img src="./images/success.png" alt="">
+              </div>
+              <h3>获取成功</h3>
+              <p id="successMsg"></p>
+              <button type="button" class="btn btn-primary" data-modal-trigger="contactSuccess">查看详情</button>
+            </div>
+
+            <div class="wechat-consult" id="wechatConsult">
+              <span class="wechat-consult-text">扫码咨询</span>
+              <div class="wechat-hover" tabindex="0" aria-label="扫码添加微信咨询">
+                <img class="wechat-icon" src="/images/wechat.png" alt="微信">
+                <img class="wechat-qr" id="wechatQr" src="/images/wechat-qr.png" alt="微信二维码">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" id="siteFooter">
+    <div id="footerLine1"></div>
+    <div id="footerLine2"></div>
+    <div id="footerLine3"></div>
+    <div id="footerLine4"></div>
+  </footer>
+
+  <div class="site-modal-backdrop backdrop-blur-xs" id="siteModalBackdrop" hidden></div>
+
+  <div class="site-modal" id="privacyModal" hidden aria-hidden="true">
+    <div class="site-modal-dialog glass" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+      <button class="site-modal-close" type="button" data-modal-close aria-label="关闭弹窗">×</button>
+      <div class="site-modal-header">
+        <h1 class="site-modal-title" id="privacyModalTitle">隐私政策</h1>
+      </div>
+      <div class="site-modal-body">
+        <div class="site-modal-content privacy-modal-content">
+          <h2>一、收集信息范围</h2>
+          <p>我们在表单中收集以下信息：</p>
+          <ul>
+            <li>手机号</li>
+            <li>是否使用过 VIDream 工具</li>
+            <li>擅长短剧类型</li>
+          </ul>
+
+          <h2>二、使用目的</h2>
+          <p>上述信息仅用于以下目的：</p>
+          <ul>
+            <li>短剧订单对接与匹配</li>
+            <li>创作者能力评估</li>
+            <li>VIDream 工具试用通知</li>
+          </ul>
+
+          <h2>三、数据存储期限</h2>
+          <p>您的个人信息将存储 <strong id="privacyRetentionDays">365</strong> 天。到期后自动删除或匿名化处理。</p>
+
+          <h2>四、用户权利</h2>
+          <p>您有权随时通过以下方式行使您的个人信息权利：</p>
+          <ul>
+            <li>查询：了解我们存储了您的哪些信息</li>
+            <li>更正：更新不准确或不完整的信息</li>
+            <li>删除：要求删除您的个人信息</li>
+          </ul>
+          <p>请发送邮件至 <strong id="privacyContactEmail">lihuan@viju.cn</strong> 申请，我们将在收到申请后 15 个工作日内处理。</p>
+
+          <h2>五、数据安全承诺</h2>
+          <p>依托 VIDream 数据安全体系，我们承诺：</p>
+          <ul>
+            <li>用户创作数据不泄露、不滥用</li>
+            <li>采用加密传输和存储技术保护您的信息</li>
+            <li>定期进行安全审计和漏洞扫描</li>
+          </ul>
+
+          <h2>六、公司信息</h2>
+          <p id="privacyCompanyInfo">郑州微爱剧科技有限公司</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-modal" id="contactSuccessModal" hidden aria-hidden="true">
+    <div class="site-modal-dialog glass" role="dialog" aria-modal="true" aria-labelledby="contactSuccessModalTitle">
+      <button class="site-modal-close" type="button" data-modal-close aria-label="关闭弹窗">×</button>
+      <div class="site-modal-body">
+        <div class="site-modal-content success-modal-content">
+          <div class="success-card">
+            <div class="icon">🎉</div>
+            <h1 id="contactSuccessModalTitle">获取成功</h1>
+            <p id="contactSuccessText"></p>
+            <div class="success-actions">
+              <a id="contactSuccessTrialLink" href="#" target="_blank" rel="noopener"
+                class="btn btn-primary btn-lg">点击立即试用，解锁 AI 创作能力 →</a>
+              <button type="button" class="btn btn-primary btn-lg" data-modal-trigger="orderPreview">查看订单预览</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-modal" id="orderInterestSuccessModal" hidden aria-hidden="true">
+    <div class="site-modal-dialog glass" role="dialog" aria-modal="true" aria-labelledby="orderInterestSuccessTitle">
+      <button class="site-modal-close" type="button" data-modal-close aria-label="关闭弹窗">×</button>
+      <div class="site-modal-body">
+        <div class="site-modal-content success-modal-content">
+          <div class="success-card">
+            <div class="icon">✅</div>
+            <h1 id="orderInterestSuccessTitle">登记成功</h1>
+            <p id="orderInterestSuccessText">我们已收到你的订单意向登记。</p>
+            <div class="success-actions">
+              <button type="button" class="btn btn-primary btn-lg" data-modal-close>我知道了</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-modal" id="orderPreviewModal" hidden aria-hidden="true">
+    <div class="site-modal-dialog glass" role="dialog" aria-modal="true" aria-labelledby="orderPreviewModalTitle">
+      <button class="site-modal-close" type="button" data-modal-close aria-label="关闭弹窗">×</button>
+      <div class="site-modal-header">
+        <h1 class="site-modal-title" id="orderPreviewModalTitle">最新订单预览</h1>
+      </div>
+      <div class="site-modal-body">
+        <div class="site-modal-content order-modal-content">
+          <div id="ordersListModal"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js?v=20260514-02"></script>
+</body>
+
+</html>
